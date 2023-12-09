@@ -7,7 +7,7 @@ that we generate the noise on). Perlin Noise is highly adaptable and can generat
 code that supports the octaves/subdivisions runs exponentially as we recursively subdivide each original cell into four in every subsequent round.  
 
 ## Diamond-Square
-The Diamond-Square algorithm relies on random values, especially the four corners where the algorithm begins with. In both the "diamond" and "square" part of the algorithm, a random displacement is added to the mean value of the four neighboring values. Since we are computing the mean, the height of the terrain at each point depends very much on the random displacement added. The algorithm runs much faster than the Perlin Noise because it only depends on how many cells we subdivide the grid upon initialization and there is no recursion going on.
+The Diamond-Square algorithm relies on random values, especially the four corners where the algorithm begins with. In both the "diamond" and "square" part of the algorithm, a random displacement is added to the mean value of the four neighboring values. Since we are computing the mean, the height of the terrain at each point depends very much on the random displacement added and it is also less likely to have many small "mountains" in the terrain, rather, it shows a general flow. The algorithm runs much faster than the Perlin Noise because it only depends on how many cells we subdivide the grid upon initialization and there is no recursion going on.
 
 ## Worley (Voronoi) Noise
 We relied on the built-in geometry node and textures for generatingthe Worley noise. The terrain generated tend to have the "cell" look of a 2D Voronoi diagram if viewed from the top orthographic direction but is less easy to tell when the "detail" parameter increases in number.
