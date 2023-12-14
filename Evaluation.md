@@ -139,13 +139,13 @@ All the algorithms above achieve the goal of generating a terrain that imitates 
 However, perhaps due to the nature of these algorithms, so far we are unable to mimic a river without using non-algorithmic tools from blender itself to generate rivers, or anything that have a more "global feature" that we can tell by just looking at the terrain generated. We are able to generate mass portion of sea with blobs of islands and we are able to genereate vast grassland with a few ponds. We hope to be able to achieve this in the near future with algorithms.
 
 ## References
-The book of shaders. The Book of Shaders. (n.d.). https://thebookofshaders.com/12/ 
-The Diamond Square algorithm. (n.d.). https://learn.64bitdragon.com/articles/computer-science/procedural-generation/the-diamond-square-algorithm 
-Frade, M., de Vega, F. F., &amp; Cotta, C. (2012). Automatic evolution of programs for procedural generation of terrains for video games. Soft Computing, 16(11), 1893–1914. https://doi.org/10.1007/s00500-012-0863-z 
-Interview: Ken Perlin, professor, Media Research Laboratory, Courant Institute of Mathematical Sciences, New York University. (2015). Digital Character Development, 309–312. https://doi.org/10.1201/b18917-43 
-Lagae, A., Lefebvre, S., Cook, R., DeRose, T., Drettakis, G., Ebert, D. S., Lewis, J. P., Perlin, K., &amp; Zwicker, M. (2010). A survey of procedural noise functions. Computer Graphics Forum, 29(8), 2579–2600. https://doi.org/10.1111/j.1467-8659.2010.01827.x 
-Latif, A., Zuhairi, M. F., Khan, F. Q., Randhawa, P., &amp; Patel, A. (2022). A critical evaluation of Procedural Content Generation Approaches for Digital Twins. Journal of Sensors, 2022, 1–13. https://doi.org/10.1155/2022/5629645 
-Mount, D., &amp; Eastman, R. (n.d.). Procedural Generation: 2D Perlin Noise. https://www.cs.umd.edu/class/spring2018/cmsc425/Lects/lect13-2d-perlin.pdf 
-Worley, S. (1996). A cellular texture basis function. Proceedings of the 23rd Annual Conference on Computer Graphics and Interactive Techniques. https://doi.org/10.1145/237170.237267 
-YouTube. (2022, August 15). How to turn a few numbers into worlds (Fractal Perlin Noise). YouTube. https://www.youtube.com/watch?v=ZsEnnB2wrbI&amp;t=0s 
-YouTube. (2023, October 17). Add noise to objects using geometry nodes | blender tutorial | VFX_Blend. YouTube. https://www.youtube.com/watch?v=Ev4fMp79Xv0
+- The book of shaders. The Book of Shaders. (n.d.). https://thebookofshaders.com/12/ 
+- The Diamond Square algorithm. (n.d.). https://learn.64bitdragon.com/articles/computer-science/procedural-generation/the-diamond-square-algorithm 
+- Frade, M., de Vega, F. F., &amp; Cotta, C. (2012). Automatic evolution of programs for procedural generation of terrains for video games. Soft Computing, 16(11), 1893–1914. https://doi.org/10.1007/s00500-012-0863-z 
+- Interview: Ken Perlin, professor, Media Research Laboratory, Courant Institute of Mathematical Sciences, New York University. (2015). Digital Character Development, 309–312. https://doi.org/10.1201/b18917-43 
+- Lagae, A., Lefebvre, S., Cook, R., DeRose, T., Drettakis, G., Ebert, D. S., Lewis, J. P., Perlin, K., &amp; Zwicker, M. (2010). A survey of procedural noise functions. Computer Graphics Forum, 29(8), 2579–2600. https://doi.org/10.1111/j.1467-8659.2010.01827.x 
+- Latif, A., Zuhairi, M. F., Khan, F. Q., Randhawa, P., &amp; Patel, A. (2022). A critical evaluation of Procedural Content Generation Approaches for Digital Twins. Journal of Sensors, 2022, 1–13. https://doi.org/10.1155/2022/5629645 
+- Mount, D., &amp; Eastman, R. (n.d.). Procedural Generation: 2D Perlin Noise. https://www.cs.umd.edu/class/spring2018/cmsc425/Lects/lect13-2d-perlin.pdf 
+- Worley, S. (1996). A cellular texture basis function. Proceedings of the 23rd Annual Conference on Computer Graphics and Interactive Techniques. https://doi.org/10.1145/237170.237267 
+- YouTube. (2022, August 15). How to turn a few numbers into worlds (Fractal Perlin Noise). YouTube. https://www.youtube.com/watch?v=ZsEnnB2wrbI&amp;t=0s 
+- YouTube. (2023, October 17). Add noise to objects using geometry nodes | blender tutorial | VFX_Blend. YouTube. https://www.youtube.com/watch?v=Ev4fMp79Xv0
