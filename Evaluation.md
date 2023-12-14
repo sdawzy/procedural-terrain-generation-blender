@@ -1,5 +1,5 @@
 ## Evaluation of the Algorithms
-Here is the evaluation of our algorithms.
+Here is the evaluation of our algorithms. We used Perlin Noise, Diamond-Square, and Worley Noise in our project and created diverse terrains and surfaces with Python Code and built-in Blender interface. We provide brief runtime analysis and mathematical expressions for our modification of the algorithms as well as some pictures that demonstrate our progress. For complete artwork generated for this project, please refer to the Art_Portfolio document in the repo.
 
 ## Perlin Noise
 The key features of the Perlin Noise include gradient vectors, smoothing, linear interpolation, and blending different octaves. Higher octave has higher subdivision of the grid that we generate the noise on. 
