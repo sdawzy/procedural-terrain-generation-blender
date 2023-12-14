@@ -8,7 +8,7 @@ Specifically, Suppose we have an $m*n$ grid of heights. In the $l^{th}$ octave, 
 $$height_{ij} = \sum_{l=1}^k {dec\_rate}^l x_{\lfloor\frac{i}{2^{k-l}}\rfloor\lfloor\frac{j}{2^{k-l}}\rfloor l}$$
 
 ### Pros of Perlin Noise
-Perlin Noise is highly adaptable and can generate detailed patterns, which means that local changes are supported. As we generally follow the original version of Perlin Noise, we assigned random points in each cell and computed the corresponding dot products, so every "pixel" of the grid is guarunteed to have some form of height and details embedded.
+- Perlin Noise is highly adaptable and can generate detailed patterns, which means that local changes are supported. As we generally follow the original version of Perlin Noise, we assigned random points in each cell and computed the corresponding dot products, so every "pixel" of the grid is guarunteed to have some form of height and details embedded.
 
 ### Cons of Perlin Noise
 - On the other side, the iteration in our code that supports the octaves/subdivisions runs exponentially as we recursively subdivide each original cell into four in every subsequent round. The overall time complexity is $O(kmn2^{2k})$, in which `k` is the number of iterations, and `m` and `n` are initial width and length respectively. Compared to the other two algorithms, the extra multiple of `k` in the time complexity makes Perlin Noise relatively slow. 
