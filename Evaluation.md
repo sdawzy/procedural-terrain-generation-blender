@@ -2,16 +2,43 @@
 Here is the evaluation of our algorithms.
 
 ## Perlin Noise
-The key features of the Perlin Noise include gradient vectors, smoothing, linear interpolation, and blending different octaves (higher octave has higher subdivision of the grid 
-that we generate the noise on). Perlin Noise is highly adaptable and can generate detailed patterns, which menas that local changes are supported. However, the iteration in our 
-code that supports the octaves/subdivisions runs exponentially as we recursively subdivide each original cell into four in every subsequent round.  
+The key features of the Perlin Noise include gradient vectors, smoothing, linear interpolation, and blending different octaves. Higher octave has higher subdivision of the grid that we generate the noise on. 
+
+Specifically, Suppose we have an $m*n$ grid of heights. In the $l^{th}$ octave, we assign a random point within each cell with random coordinates, and for each vertex we assign a random gradient. Then, we compute the dot product for each gradient vector and the vector from the vertex to the random point in the cell. For each cell, by interpolation and smoothing, we get a section of the "flow" of the surface if viewed the cross section formed by a plane perpendicular to the y-axis(sliced from x-z direction). This "flow" will eventually become the heights when we finish the interpolation and lerping stage for each cell denote as $x_{ijl}$. In the end of each octave, we double the width and length, and multiply a persistence value by a constant $dec\_rate$. If we have $k$ iterations, the final grid will have $(2^km)*(2^kn)$ cells, and each cell has height
+$$height_{ij} = \sum_{l=1}^k {dec\_rate}^l x_{\lfloor\frac{i}{2^{k-l}}\rfloor\lfloor\frac{j}{2^{k-l}}\rfloor l}$$
+
+### Pros of Perlin Noise
+Perlin Noise is highly adaptable and can generate detailed patterns, which means that local changes are supported. As we generally follow the original version of Perlin Noise, we assigned random points in each cell and computed the corresponding dot products, so every "pixel" of the grid is guarunteed to have some form of height and details embedded.
+
+### Cons of Perlin Noise
+- On the other side, the iteration in our code that supports the octaves/subdivisions runs exponentially as we recursively subdivide each original cell into four in every subsequent round. The overall time complexity is $O(kmn2^{2k})$, in which `k` is the number of iterations, and `m` and `n` are initial width and length respectively. Compared to the other two algorithms, the extra multiple of `k` in the time complexity makes Perlin Noise relatively slow. 
+  
+- By the same reason as mentioned above for the random point assignment, the overall pattern generated may be overly crowded and fail to imitate a completely flat terrain/ramp. For example, we cannot generate a wedge nor flat sea surface. 
+
+- To solve the problem of lack of flat terrain, we set a lower threshold for height as the `sea level`, so that every surface with height below this threshold becomes completely flat. 
 
 ## Diamond-Square
-The Diamond-Square algorithm relies on random values, especially the four corners where the algorithm begins with. In both the "diamond" and "square" part of the algorithm, a random displacement is added to the mean value of the four neighboring values. Since we are computing the mean, the height of the terrain at each point depends very much on the random displacement added and it is also less likely to have many small "mountains" in the terrain, rather, it shows a general flow. The algorithm runs much faster than the Perlin Noise because it only depends on how many cells we subdivide the grid upon initialization and there is no recursion going on.
+The Diamond-Square algorithm relies on random values, especially the four corners where the algorithm begins with. In both the "diamond" and "square" part of the algorithm, a random displacement is added to the mean value of the four neighboring values. 
+
+In detail, we have a grid of $(2^n+1)*(2^n+1)$ cells. First, we assign four random values to the four corners. Each step $k$ consists of a `diamond phase` and a `square phase`. In `diamond phase`, we iterate all squares with side length $2^{n-k}$ and calculate the value in the center of the square as the average of the four corners plus a random noise of scale $2^{-k}$. Then in the `square phase`, we iterate all diamonds with diagonal length $2^{n-k}$ and calculate the value in the center of the diamonds as the average of the four corners plus a random noise of scale $2^{-k}$. Repeat the step $n$ times, until every cell in the grid has a value assigned. 
+
+### Pros of Diamond Square
+- The algorithm runs much faster than the Perlin Noise, because it only depends on how many cells we subdivide the grid upon initialization and there is no recursion going on, and the value at each vertex in the grid is calculated exactly once. Its time complexity is $O(2^{2n})$, where $n$ is the number of iterations. 
+
+- Moreover, the algorithm is flexible in the sense that we can generate extremely different terrains by only changing a few parameters of the algorithm (i.e, the initialization point of the four corners, the random displacement range, etc). 
+
+### Cons of Diamond Square
+- Since we are computing the mean for both steps, the height of the terrain at each point depends heavily on the random displacement added and it is also less likely to have many small "mountains" in the terrain, rather, it shows a gradual flow due to our control on the random displacement range. In particular, the initial values of the four corners have huge influence on the final landscape we generate.
 
 ## Worley (Voronoi) Noise
-We relied on the built-in geometry node and textures for generatingthe Worley noise. The terrain generated tend to have the "cell" look of a 2D Voronoi diagram if viewed from the top orthographic direction but is less easy to tell when the "detail" parameter increases in number.
-Due to the nature of the voronoi diagram, the terrain generated looks much different to the other two noises, mostly in terms of shape.
+We had two versions of Worley noise, one relied on the built-in geometry node and texture in blender while we built the other one from scractch. For both methods, the terrain generated tend to have the "cell" look of a 2D Voronoi diagram if viewed from the top orthographic direction. However, for the full blender version, it is less easy to tell when the "detail" parameter increases. As for our own version, with careful blending of the "smoothing function" from the Perlin Noise and "extra weight" added to each Voronoi cell, we were able to create cells with different sizes, which adds variability to the final display. 
+Due to the nature of the voronoi diagram, the terrain generated looks much different to the other two noises, mostly in terms of shape as well as height. For our own version, we added the similar skill of cropping the "sea level" to reduce the "troughs" created by the original Worley noise.
+
+### Pros of Worley Noise
+- The algorithm produces relatively consistent patterns for each run, so if we wanted an algorithm that will generate terrains with less variability, this might be a better choice than the previous two. Due to the nature of the Voronoi diagram, it has a more circular shape of every trough and a less smooth peak formed by the equidistance line between the cells, which is indeed very unique.
+
+### Cons of Worley Noise
+- The Worley noise is less adaptable and requires much math to alternate its fundamental shape. The edge formed by the equidistance line is also sharp and requires additional smoothing procedure.
 
 ## Something Else That We Wanna Say...
 All the algorithms above achieve the goal of generating a terrain that imitates a landscape: there are heights and by using different colors we create different meanings for different levels of height. Mostly we color the terrain (from low to high) in terms of sea, land, mountain, and snow on the mountain, but we are also able to generate different kinds of landscapes, such as desert or volcano. 
