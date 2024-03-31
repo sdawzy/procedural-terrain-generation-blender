@@ -16,7 +16,7 @@ def generate_worley(width=10, n=36, size=4.0, z=1.0, random_range=1.0,
     depth = [[0]*width for _ in range(width)]
     pixels = [[random.uniform(-noise_range, noise_range) for _ in range(resolution) ]
         for _ in range(resolution)]
-    distances = [[0]*resolution for _ in range(resolution)]
+    heights = [[0]*resolution for _ in range(resolution)]
 
     # initialize grid points
     for i in range(width):
@@ -39,11 +39,11 @@ def generate_worley(width=10, n=36, size=4.0, z=1.0, random_range=1.0,
                     if 0 <= x < width and 0 <= y < width:
                         store.append(depth[i][j] + weights[i][j] * 
                             math.sqrt((grid[x][y][0] - coord_x)**2 + (grid[x][y][1] - coord_y)**2))
-            distances[i][j] = min(1, min(store))
+            heights[i][j] = min(1, min(store))
 
     for i in range(resolution):
         for j in range(resolution):
-            pixels[i][j] += smoothing(distances[i][j]) * z
+            pixels[i][j] += smoothing(heights[i][j]) * z
 
     # convert height into vertices
     vertices = []
